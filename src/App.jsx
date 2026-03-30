@@ -58,7 +58,7 @@ function App() {
   }, []);
 
   return (
-    <Router>
+    <Router basename="/websitegit">
       <Navbar />
       <div className="main-content">
         <Routes>
