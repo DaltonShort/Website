@@ -20,6 +20,9 @@ function Projects() {
           <div className="project-card" key={project.id}>
             {project.fileUrl && <a href={project.fileUrl} target="_blank" rel="noopener noreferrer">[File]</a>}
             <h2>{project.title}</h2>
+            {project.link && (
+              <a href={project.link} target="_blank" rel="noopener noreferrer" style={{ color: '#2563eb', wordBreak: 'break-all', display: 'block', marginBottom: '0.5rem' }}>{project.link}</a>
+            )}
             <p>{project.description}</p>
           </div>
         ))}

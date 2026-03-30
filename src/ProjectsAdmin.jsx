@@ -5,9 +5,9 @@ import { getStorage } from "firebase/storage";
 
 function ProjectsAdmin() {
   const [projects, setProjects] = useState([]);
-  const [newProject, setNewProject] = useState({ title: "", description: "" });
+  const [newProject, setNewProject] = useState({ title: "", link: "", description: "" });
   const [misc, setMisc] = useState([]);
-  const [newMisc, setNewMisc] = useState({ title: "", description: "" });
+  const [newMisc, setNewMisc] = useState({ title: "", link: "", description: "" });
 
   // Load projects from Firestore
   useEffect(() => {
@@ -63,7 +63,14 @@ function ProjectsAdmin() {
       <ul>
         {projects.map((p) => (
           <li key={p.id}>
-            <strong>{p.title}</strong>: {p.description}
+            <strong>{p.title}</strong>
+            {p.link && (
+              <>
+                <br />
+                <a href={p.link} target="_blank" rel="noopener noreferrer" style={{ color: '#2563eb', wordBreak: 'break-all' }}>{p.link}</a>
+              </>
+            )}
+            : {p.description}
             {p.fileUrl && <a href={p.fileUrl} target="_blank" rel="noopener noreferrer">[File]</a>}
             <button onClick={() => removeProject(p.id)}>Delete</button>
           </li>
@@ -76,6 +83,12 @@ function ProjectsAdmin() {
         onChange={e => setNewProject({ ...newProject, title: e.target.value })}
       />
       <input
+        placeholder="Link (optional)"
+        value={newProject.link}
+        onChange={e => setNewProject({ ...newProject, link: e.target.value })}
+        style={{ marginBottom: '0.5rem' }}
+      />
+      <input
         placeholder="Description"
         value={newProject.description}
         onChange={e => setNewProject({ ...newProject, description: e.target.value })}
@@ -86,7 +99,14 @@ function ProjectsAdmin() {
       <ul>
         {misc.map((m) => (
           <li key={m.id}>
-            <strong>{m.title}</strong>: {m.description}
+            <strong>{m.title}</strong>
+            {m.link && (
+              <>
+                <br />
+                <a href={m.link} target="_blank" rel="noopener noreferrer" style={{ color: '#2563eb', wordBreak: 'break-all' }}>{m.link}</a>
+              </>
+            )}
+            : {m.description}
             {m.fileUrl && <a href={m.fileUrl} target="_blank" rel="noopener noreferrer">[File]</a>}
             <button onClick={() => removeMisc(m.id)}>Delete</button>
           </li>
@@ -97,6 +117,12 @@ function ProjectsAdmin() {
         placeholder="Title"
         value={newMisc.title}
         onChange={e => setNewMisc({ ...newMisc, title: e.target.value })}
+      />
+      <input
+        placeholder="Link (optional)"
+        value={newMisc.link}
+        onChange={e => setNewMisc({ ...newMisc, link: e.target.value })}
+        style={{ marginBottom: '0.5rem' }}
       />
       <input
         placeholder="Description"
