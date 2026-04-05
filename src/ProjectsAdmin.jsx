@@ -5,9 +5,9 @@ import { getStorage } from "firebase/storage";
 
 function ProjectsAdmin() {
   const [projects, setProjects] = useState([]);
-  const [newProject, setNewProject] = useState({ title: "", link: "", description: "" });
+  const [newProject, setNewProject] = useState({ title: "", link: "", description: "", imageUrl: "", tags: "", github: "" });
   const [misc, setMisc] = useState([]);
-  const [newMisc, setNewMisc] = useState({ title: "", link: "", description: "" });
+  const [newMisc, setNewMisc] = useState({ title: "", link: "", description: "", imageUrl: "", tags: "", github: "" });
 
   // Load projects from Firestore
   useEffect(() => {
@@ -24,9 +24,13 @@ function ProjectsAdmin() {
   // Add project
   const addProject = async () => {
     try {
-      const docRef = await addDoc(collection(db, "projects"), { ...newProject });
-      setProjects([...projects, { ...newProject, id: docRef.id }]);
-      setNewProject({ title: "", description: "" });
+      const projectData = {
+        ...newProject,
+        tags: newProject.tags ? newProject.tags.split(',').map(t => t.trim()) : []
+      };
+      const docRef = await addDoc(collection(db, "projects"), projectData);
+      setProjects([...projects, { ...projectData, id: docRef.id }]);
+      setNewProject({ title: "", link: "", description: "", imageUrl: "", tags: "", github: "" });
     } catch (err) {
       console.error('Error adding project:', err);
       alert('Error adding project: ' + err.message);
@@ -42,9 +46,13 @@ function ProjectsAdmin() {
   // Add misc project
   const addMisc = async () => {
     try {
-      const docRef = await addDoc(collection(db, "miscellaneous"), { ...newMisc });
-      setMisc([...misc, { ...newMisc, id: docRef.id }]);
-      setNewMisc({ title: "", description: "" });
+      const miscData = {
+        ...newMisc,
+        tags: newMisc.tags ? newMisc.tags.split(',').map(t => t.trim()) : []
+      };
+      const docRef = await addDoc(collection(db, "miscellaneous"), miscData);
+      setMisc([...misc, { ...miscData, id: docRef.id }]);
+      setNewMisc({ title: "", link: "", description: "", imageUrl: "", tags: "", github: "" });
     } catch (err) {
       console.error('Error adding misc:', err);
       alert('Error adding misc: ' + err.message);
@@ -86,7 +94,21 @@ function ProjectsAdmin() {
         placeholder="Link (optional)"
         value={newProject.link}
         onChange={e => setNewProject({ ...newProject, link: e.target.value })}
-        style={{ marginBottom: '0.5rem' }}
+      />
+      <input
+        placeholder="Image URL (optional)"
+        value={newProject.imageUrl}
+        onChange={e => setNewProject({ ...newProject, imageUrl: e.target.value })}
+      />
+      <input
+        placeholder="Tags (comma-separated, optional)"
+        value={newProject.tags}
+        onChange={e => setNewProject({ ...newProject, tags: e.target.value })}
+      />
+      <input
+        placeholder="GitHub URL (optional)"
+        value={newProject.github}
+        onChange={e => setNewProject({ ...newProject, github: e.target.value })}
       />
       <input
         placeholder="Description"
@@ -122,7 +144,21 @@ function ProjectsAdmin() {
         placeholder="Link (optional)"
         value={newMisc.link}
         onChange={e => setNewMisc({ ...newMisc, link: e.target.value })}
-        style={{ marginBottom: '0.5rem' }}
+      />
+      <input
+        placeholder="Image URL (optional)"
+        value={newMisc.imageUrl}
+        onChange={e => setNewMisc({ ...newMisc, imageUrl: e.target.value })}
+      />
+      <input
+        placeholder="Tags (comma-separated, optional)"
+        value={newMisc.tags}
+        onChange={e => setNewMisc({ ...newMisc, tags: e.target.value })}
+      />
+      <input
+        placeholder="GitHub URL (optional)"
+        value={newMisc.github}
+        onChange={e => setNewMisc({ ...newMisc, github: e.target.value })}
       />
       <input
         placeholder="Description"

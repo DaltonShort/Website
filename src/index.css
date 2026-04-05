@@ -15,6 +15,16 @@
   --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
   --mono: ui-monospace, Consolas, monospace;
 
+  /* Site-specific variables */
+  --navbar-bg: var(--primary-bg, #7f1d1d);
+  --navbar-text: var(--text-main, #fff);
+  --navbar-accent: var(--accent, #ef4444);
+  --hero-bg: linear-gradient(135deg, var(--secondary-bg, #f8fafc) 0%, var(--card-bg, #e0e7ef) 100%);
+  --section-bg: var(--secondary-bg, #f8fafc);
+  --card-bg: var(--card-bg, #fff);
+  --card-shadow: var(--shadow, 0 2px 16px 0 rgba(0,0,0,0.06));
+  --card-hover-shadow: 0 6px 32px 0 rgba(59,130,246,0.13);
+
   font: 18px/145% var(--sans);
   letter-spacing: 0.18px;
   color-scheme: light dark;
@@ -52,6 +62,7 @@
 
 body {
   margin: 0;
+  background: var(--bg);
 }
 
 #root {
