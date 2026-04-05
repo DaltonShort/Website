@@ -52,6 +52,14 @@
   background: var(--card-bg, #fff);
   color: var(--text, #6b6375);
   font-size: 1rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  outline: none;
+  border-color: var(--accent, #aa3bff);
+  box-shadow: 0 0 0 3px rgba(170, 59, 255, 0.1);
 }
 
 .contact-form textarea {
@@ -67,16 +75,26 @@
   border-radius: 6px;
   font-weight: 600;
   cursor: pointer;
-  transition: background 0.2s;
+  transition: background 0.2s, transform 0.1s, box-shadow 0.2s;
+  position: relative;
+  overflow: hidden;
 }
 
 .contact-form button:hover:not(:disabled) {
   background: var(--accent-border, rgba(170, 59, 255, 0.5));
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(170, 59, 255, 0.3);
+}
+
+.contact-form button:active:not(:disabled) {
+  transform: translateY(0);
 }
 
 .contact-form button:disabled {
   background: #9ca3af;
   cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
 }
 
 .status {

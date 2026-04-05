@@ -25,10 +25,25 @@
   cursor: pointer;
   display: flex;
   flex-direction: column;
-  transition: transform 180ms ease, box-shadow 180ms ease;
+  transition: transform 180ms ease, box-shadow 180ms ease, opacity 300ms ease;
+  animation: cardEnter 0.6s ease-out forwards;
+  opacity: 0;
 }
+
+.project-card:nth-child(1) { animation-delay: 0.1s; }
+.project-card:nth-child(2) { animation-delay: 0.2s; }
+.project-card:nth-child(3) { animation-delay: 0.3s; }
+.project-card:nth-child(4) { animation-delay: 0.4s; }
+.project-card:nth-child(5) { animation-delay: 0.5s; }
+.project-card:nth-child(6) { animation-delay: 0.6s; }
+
+@keyframes cardEnter {
+  from { opacity: 0; transform: translateY(30px) scale(0.95); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
 .project-card:hover {
-  transform: translateY(-6px);
+  transform: translateY(-6px) scale(1.02);
   box-shadow: 0 8px 24px rgba(0,0,0,0.09);
 }
 
@@ -112,7 +127,14 @@
   justify-content: center;
   z-index: 999;
   padding: 1rem;
+  animation: backdropFade 0.3s ease-out;
 }
+
+@keyframes backdropFade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
 .modal {
   background: var(--card-bg, #fff);
   max-width: 820px;
@@ -123,6 +145,12 @@
   position: relative;
   max-height: 90vh;
   overflow: auto;
+  animation: modalSlide 0.4s ease-out;
+}
+
+@keyframes modalSlide {
+  from { opacity: 0; transform: scale(0.9) translateY(-20px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
 }
 .modal-close {
   position: absolute;
@@ -132,6 +160,11 @@
   background: transparent;
   font-size: 1.5rem;
   cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.modal-close:hover {
+  transform: scale(1.1);
 }
 .modal-image {
   width: 100%;
@@ -150,6 +183,12 @@
   text-align: center;
   padding: 2rem;
   color: var(--text-secondary, #6b6375);
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
 }
 
 .error {

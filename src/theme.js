@@ -12,6 +12,7 @@ export const themes = {
     '--card-bg': '#23203A',
     '--navbar-bg': '#23203A',
     '--navbar-accent': '#A3FFD6',
+    '--hero-bg': 'linear-gradient(135deg, #18122B 0%, #393053 100%)',
     '--shadow': '0 4px 32px 0 rgba(0,0,0,0.18)'
   },
   // Add more themes here as needed
